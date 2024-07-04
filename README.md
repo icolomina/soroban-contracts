@@ -17,6 +17,8 @@ The Paid Account contract allows users to deposit tokens (a previously establish
 ### Simple deposit
 A contract to make a simple deposit to the contract address.
 
+-----------------------------------------------------------------------------------
+
 **IMPORTANT**: These contracts have a test suite but they have not been audited. They can serve as a base for learning but not for being used directly 
 in a real application without being audited first.
 
