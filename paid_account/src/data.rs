@@ -23,7 +23,13 @@ pub enum Error {
     ContractInsufficientBalance = 2,
     ContractNotInitialized = 3,
     AmountLessOrEqualThan0 = 4,
-    AmountLessOrThan0 = 5
+    AmountLessOrThan0 = 5,
+    ContractAlreadyInitialized = 6,
+    RateMustBeGreaterThan0 = 7,
+    DepositTtlMustBeGreaterThan0 = 8,
+    AddressNotClaimableYet = 9,
+    AddressAlreadyDeposited = 10,
+    ContractFinancingReached = 11
 }
 
 #[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
@@ -31,7 +37,12 @@ pub enum Error {
 #[contracttype]
 pub enum State {
     Pending = 1,
-    Initialized = 2
+    Initialized = 2,
+    Deposited = 3,
+    NoDeposited = 4,
+    Withdrawn = 5,
+    FinancingReached = 6
+
 }
 
 #[derive(Clone)]
@@ -42,6 +53,9 @@ pub enum DataKey {
     DepositStart(Address),
     Token,
     Admin,
-    State
+    State,
+    ClaimBlockDays,
+    ClaimTime(Address),
+    AddressStatus(Address)
 }
 

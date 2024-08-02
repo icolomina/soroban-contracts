@@ -1,7 +1,7 @@
 #![no_std]
 
 mod data;
-mod interest;
 mod balance;
+mod claim;
 mod contract;
 mod test;
