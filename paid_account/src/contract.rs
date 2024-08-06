@@ -67,6 +67,7 @@ impl PaidAccount {
         env.storage().instance().set(&state_key, &State::Initialized);
         env.storage().instance().set(&interest_rate_key, &i_rate);
         env.storage().instance().set(&claim_block_days_key, &claim_block_days);
+        
 
         Ok(true)
     }
@@ -95,8 +96,6 @@ impl PaidAccount {
         let contract_address_balance = tk.balance(&env.current_contract_address());
         Ok(contract_address_balance)
     }
-    
-
     
     pub fn user_deposit(env: Env, addr: Address, amount: i128) -> Result<Balance, Error> {
 
@@ -215,6 +214,9 @@ impl PaidAccount {
 
         let state_key = DataKey::State;
         env.storage().instance().set(&state_key, &State::FinancingReached);
+        env.storage()
+            .instance()
+            .extend_ttl(INSTANCE_LIFETIME_THRESHOLD, INSTANCE_BUMP_AMOUNT);
 
         Ok(true)
     }
