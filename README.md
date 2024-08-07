@@ -51,4 +51,4 @@ cargo build
 cargo test
 ```
 
-> The last command must be executed inside the contract root folder. For instance: *soroban-contracts/paid_account*.
+> The last commands must be executed inside the contract root folder. For instance: *soroban-contracts/paid_account*.
