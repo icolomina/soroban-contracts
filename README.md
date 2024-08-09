@@ -35,7 +35,7 @@ You can read about these contracts in my dev.to blog:
 
 > The Simple Deposit article link shows an explanation about the contract and how to interact with it using a PHP / Symfony application.
 
-## Test de contracts
+## Test the contracts
 
 To test the contracts, you must prepare first your environment. Follow the [soroban official documentation](https://developers.stellar.org/docs/build/smart-contracts/getting-started/setup) to achieve it.
 After having the environment ready, follow the next steps:
@@ -51,4 +51,4 @@ cargo build
 cargo test
 ```
 
-> The last command must be executed inside the contract root folder. For instance: *soroban-contracts/paid_account*.
+> The last commands must be executed inside the contract root folder. For instance: *soroban-contracts/paid_account*.
