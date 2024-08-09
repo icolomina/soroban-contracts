@@ -183,3 +183,18 @@ fn test_user_withdrawal_contract_insufficient_balance() {
 
     test_data.client.user_withdrawal(&test_data.user);
 }
+
+#[test]
+fn test_admin_withdrawal() {
+    let e = Env::default();
+    let test_data = init_test_data(&e);
+    let another_user = Address::generate(&e);
+    test_data.token_admin.mint(&test_data.admin, &100000);
+    test_data.token_admin.mint(&test_data.user, &100000);
+
+    test_data.client.init(&test_data.admin, &test_data.token.address, &500_u32, &1_u64);
+    test_data.client.user_deposit(&test_data.user, &100000);
+
+    let current_balance = test_data.client.admin_withdrawal(&another_user, &90000);
+    assert_eq!(current_balance, 10000);
+}

@@ -174,7 +174,7 @@ impl PaidAccount {
         Ok(addr_balance.total)
     }
 
-    pub fn admin_withdrawal(env: Env, amount: i128) -> Result<i128, Error> {
+    pub fn admin_withdrawal(env: Env, target_addr: Address, amount: i128) -> Result<i128, Error> {
 
         if !check_contract_initialized(&env) {
             return Err(Error::ContractNotInitialized);
@@ -197,7 +197,7 @@ impl PaidAccount {
             .instance()
             .extend_ttl(INSTANCE_LIFETIME_THRESHOLD, INSTANCE_BUMP_AMOUNT);
 
-        tk.transfer(&env.current_contract_address(), &admin_addr, &amount);
+        tk.transfer(&env.current_contract_address(), &target_addr, &amount);
         Ok(tk.balance(&env.current_contract_address()))
 
     }
