@@ -70,12 +70,14 @@ fn test_user_deposit() {
     let e = Env::default();
     let test_data = init_test_data(&e);
     let another_user = Address::generate(&e);
+    let another_admin_addr = Address::generate(&e);
     test_data.token_admin.mint(&test_data.user, &1000000);
     test_data.token_admin.mint(&test_data.admin, &1000000);
     test_data.token_admin.mint(&another_user, &1000000);
+    test_data.token_admin.mint(&another_admin_addr, &1000000);
 
     test_data.client.init(&test_data.admin, &test_data.token.address, &500_u32, &6_u64);
-    test_data.client.admin_deposit(&100000);
+    test_data.client.admin_deposit(&another_admin_addr, &100000);
 
     let balance_test_user: Balance = test_data.client.user_deposit(&test_data.user, &500000);
     test_data.client.user_deposit(&another_user, &500000);
@@ -135,10 +137,11 @@ fn test_contract_non_initialized() {
 fn test_zero_amount() {
     let e = Env::default();
     let test_data = init_test_data(&e);
+    let another_admin_addr = Address::generate(&e);
     test_data.token_admin.mint(&test_data.admin, &100);
 
     test_data.client.init(&test_data.admin, &test_data.token.address, &5_u32, &30_u64);
-    test_data.client.admin_deposit(&0);
+    test_data.client.admin_deposit(&another_admin_addr, &0);
 }
 
 #[test]
@@ -146,11 +149,13 @@ fn test_zero_amount() {
 fn test_unable_to_withdraw() {
     let e = Env::default();
     let test_data = init_test_data(&e);
+    let another_admin_addr = Address::generate(&e);
     test_data.token_admin.mint(&test_data.user, &1000000);
     test_data.token_admin.mint(&test_data.admin, &1000000);
+    test_data.token_admin.mint(&another_admin_addr, &1000000);
 
     test_data.client.init(&test_data.admin, &test_data.token.address, &500_u32, &50_u64);
-    test_data.client.admin_deposit(&100000);
+    test_data.client.admin_deposit(&another_admin_addr, &100000);
     let balance = test_data.client.user_deposit(&test_data.user, &500000);
 
     assert_eq!(balance.deposited, 500000);

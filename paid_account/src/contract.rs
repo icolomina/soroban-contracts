@@ -72,7 +72,7 @@ impl PaidAccount {
         Ok(true)
     }
 
-    pub fn admin_deposit(env: Env, amount: i128) -> Result<i128, Error> {
+    pub fn admin_deposit(env: Env, addr: Address, amount: i128) -> Result<i128, Error> {
 
         if !check_contract_initialized(&env) {
             return Err(Error::ContractNotInitialized);
@@ -86,12 +86,10 @@ impl PaidAccount {
             .instance()
             .extend_ttl(INSTANCE_LIFETIME_THRESHOLD, INSTANCE_BUMP_AMOUNT);
 
-        let admin_addr_key = DataKey::Admin;
-        let admin_addr: Address = env.storage().instance().get(&admin_addr_key).unwrap();
-        admin_addr.require_auth();
+        addr.require_auth();
 
         let tk = get_token(&env);
-        tk.transfer(&admin_addr, &env.current_contract_address(), &amount);
+        tk.transfer(&addr, &env.current_contract_address(), &amount);
 
         let contract_address_balance = tk.balance(&env.current_contract_address());
         Ok(contract_address_balance)
@@ -184,9 +182,7 @@ impl PaidAccount {
             return Err(Error::AmountLessOrEqualThan0);
         }
 
-        let admin_key = DataKey::Admin;
-        let admin_addr: Address = env.storage().instance().get(&admin_key).unwrap();
-        admin_addr.require_auth();
+        target_addr.require_auth();
 
         let tk = get_token(&env);
         if tk.balance(&env.current_contract_address()) < amount {
