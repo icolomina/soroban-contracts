@@ -9,7 +9,7 @@ This contract manages a ballot process following a custodial approach. Allowed-t
 This contract also manages a ballot process but, in this case, the user must hold a token to be able to vote. The token is defined by the BallotToken contract (ballot/BallotToken). The user must sign the transaction with his wallet since authorization is required and, before storing the vote, the contract ensures the user address holds the token checking the balance. 
 
 ### House Purchase
-This contract manages a house purchase between buyer and seller. The contract allows the buyer to send the first payment and the buyer (after receiving the first payment) to propose a meeting to formalize the purchase. After formalizing, the contract allows the seller to transfer the rest of the payment.
+This contract manages a house purchase between buyer and seller. It uses another contract which acts as an asset and represents the underlying asset, that is, the house. After the buyer send the payment to the current asset owner, it changes the ownership of the asset to the buyer.
 
 ### Paid Account
 The Paid Account contract allows users to deposit tokens (a previously established token) in the contract address and earn daily interest. The contract provides functions for administrators so that the contract always has funds when users request withdrawals.
@@ -26,7 +26,7 @@ You can read about these contracts in my dev.to blog:
 
 - **Ballot**: https://dev.to/icolomina/building-a-ballot-contract-using-soroban-plataform-and-rust-sdk-1hg1
 - **Ballot with token**: https://dev.to/icolomina/using-tokenization-to-control-a-soroban-voting-smart-contract-3lm6
-- **House Purchase**: https://dev.to/icolomina/creating-a-dapp-using-php-and-a-house-purchase-soroban-smart-contract-38f1
+- **House Purchase**: New version comming soon
 
 > The House Purchase article link shows how to connect to the contract using PHP. It's also a good way to learn how the contract works
 
