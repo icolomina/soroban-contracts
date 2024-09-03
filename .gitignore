@@ -6,9 +6,13 @@
 /ballot/BallotToken/test_snapshots/
 /ballot/BallotToken/Cargo.lock
 
-/house_purchase/target/
-/house_purchase/test_snapshots/
-/house_purchase/Cargo.lock
+/house_purchase/HouseAsset/target/
+/house_purchase/HouseAsset/test_snapshots/
+/house_purchase/HouseAsset/Cargo.lock
+
+/house_purchase/HousePurchase/target/
+/house_purchase/HousePurchase/test_snapshots/
+/house_purchase/HousePurchase/Cargo.lock
 
 /paid_account/target/
 /paid_account/test_snapshots/
